@@ -43,6 +43,15 @@ public class TypeCheckTest extends CompilerTypeTestCase {
     reportMissingOverrides = CheckLevel.WARNING;
   }
 
+    // --- Start of the new test method HERE ---
+  public void testEnumMissingTypeError() throws Exception {
+    testTypes(
+        "/** @enum {string} */ var MyEnum = {FOO: 'a'};" +
+        "/** @return {number} */ function f() { return MyEnum.FOO + 1; }");
+  }
+    // --- End of new test method ---
+
+
   public void testInitialTypingScope() {
     Scope s = new TypedScopeCreator(compiler,
         new DefaultCodingConvention()).createInitialScope(
